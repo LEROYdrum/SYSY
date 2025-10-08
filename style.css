@@ -56,7 +56,6 @@ header {
     align-items: center;
     border-bottom: 2px solid var(--color-rose-patisserie); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* L'en-tête n'est plus fixe */
     z-index: 1000;
 }
 header .logo-container {
@@ -474,22 +473,15 @@ footer {
 @media (max-width: 768px) {
     
     header {
+        /* Permet aux éléments de l'en-tête de s'empiler */
         flex-direction: column;
         padding: 0.75rem 3%;
         text-align: center;
     }
 
-    /* Masque la navigation et le texte sur mobile */
+    /* La navigation est masquée (recommandé si vous n'avez pas de menu "burger") */
     header nav {
         display: none; 
-    }
-    header .logo-container p {
-        display: none; 
-    }
-    
-    /* Masque le bouton panier du header pour n'utiliser que le bouton flottant */
-    header .cart-button {
-        display: none;
     }
 
     .brand-logo {
@@ -497,6 +489,25 @@ footer {
         margin-right: 0;
     }
     
+    /* CORRECTION : Affiche la devise ('Vos instants gourmands...') */
+    header .logo-container p {
+        font-size: 0.85rem;
+        display: block; 
+        margin-top: 0.25rem;
+    }
+    
+    /* CORRECTION : Affiche le bouton Panier de l'en-tête (s'il est présent dans le HTML) */
+    header .cart-button {
+        display: block; 
+        position: static; 
+        margin-top: 10px;
+    }
+    
+    /* CORRECTION : Affiche les boutons flottants Panier et Contact */
+    #floating-cta {
+        display: flex;
+    }
+
     main {
         padding: 1.5rem 3%;
     }
@@ -518,5 +529,12 @@ footer {
     .menu-grid {
         grid-template-columns: 1fr; 
         gap: 1rem;
+    }
+    
+    /* Ajustement du modal pour les petits écrans */
+    .modal-content {
+        width: 90%;
+        margin: 5% auto;
+        max-height: 90vh; 
     }
 }
