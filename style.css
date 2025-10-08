@@ -47,7 +47,7 @@ body {
     text-align: center;
 }
 
-/* --- HEADER --- */
+/* --- HEADER (MODIFIÉ : Défile avec la page) --- */
 header {
     background-color: var(--color-cream); 
     padding: 1rem 5%;
@@ -56,9 +56,7 @@ header {
     align-items: center;
     border-bottom: 2px solid var(--color-rose-patisserie); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: relative; /* DÉSACTIVE L'EFFET FIXE */
 }
 header .logo-container {
     display: flex; 
@@ -155,7 +153,6 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Configuration pour l'effet de scintillement */
     position: relative; 
     overflow: hidden; 
 }
@@ -172,7 +169,7 @@ main {
     100% { border-left-color: var(--color-rose-patisserie); }
 }
 
-/* EFFET DE SCINTILLEMENT LÉGER SUR L'ARRIÈRE-PLAN */
+/* EFFET DE SCINTILLEMENT LÉGER SUR L'ARRIÈRE-PLAN (Désactivé sur mobile) */
 .menu-item::after {
     content: '';
     position: absolute;
@@ -316,7 +313,7 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* NOUVELLE ANIMATION : Flash rapide à l'ajout (pour indiquer qu'un article a été ajouté) */
+/* NOUVELLE ANIMATION : Flash rapide à l'ajout */
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -350,7 +347,7 @@ footer {
     color: var(--color-primary-dark);
 }
 
-/* Section récapitulative (reste fixe en bas) */
+/* Section récapitulative */
 .cart-summary {
     padding: 0.75rem 0;
     border-top: 2px solid var(--color-rose-patisserie);
@@ -410,9 +407,9 @@ footer {
 
 .gallery-grid {
     display: grid;
-    /* Mise en page avancée : 4 colonnes pour le grand écran, très ordonné */
+    /* Mise en page avancée : 4 colonnes pour le grand écran */
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 250px; /* Hauteur uniforme pour les petites photos */
+    grid-auto-rows: 250px; 
     gap: 15px;
     margin-top: 30px;
 }
@@ -426,19 +423,19 @@ footer {
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    border: 3px solid var(--color-light-beige); /* Petite bordure élégante */
+    border: 3px solid var(--color-light-beige); 
 }
 
 .gallery-item:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    z-index: 10; /* Assure que l'image survole les autres */
+    z-index: 10; 
 }
 
 /* Photo Principale : Pancakes */
 .gallery-item.large {
-    grid-column: span 2; /* S'étend sur deux colonnes (50% de la largeur) */
-    grid-row: span 2;    /* S'étend sur deux lignes (Deux fois plus haut) */
+    grid-column: span 2; 
+    grid-row: span 2;    
 }
 
 .caption {
@@ -446,7 +443,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(107, 79, 67, 0.85); /* Marron opaque */
+    background-color: rgba(107, 79, 67, 0.85); 
     color: var(--text-color-light);
     padding: 8px;
     font-size: 0.9em;
@@ -484,7 +481,6 @@ footer {
     }
 
     header nav {
-        /* Affichage de la nav sur mobile */
         display: flex; 
         flex-direction: column;
         width: 100%;
@@ -502,6 +498,7 @@ footer {
         display: none; 
     }
 
+    /* Le bouton panier reste fixe en bas à droite sur mobile pour un accès facile */
     .cart-button {
         position: fixed; 
         bottom: 1rem;
@@ -530,7 +527,7 @@ footer {
 
     /* Ajustement responsive pour la galerie sur mobile */
     .gallery-grid {
-        grid-template-columns: 1fr 1fr; /* Force 2 colonnes */
+        grid-template-columns: 1fr 1fr; 
         grid-auto-rows: 150px;
         gap: 8px;
     }
