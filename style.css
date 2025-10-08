@@ -3,12 +3,12 @@
 
 /* Variables pour le thème inspiré du Nouveau Logo (Marron/Rose Pâtisserie) */
 :root {
-    --color-primary-dark: #6B4F43;     /* Marron foncé du texte et cadre du logo */
-    --color-light-beige: #F8F5E9;     /* Beige clair du fond du logo (pour le fond principal du site) */
-    --color-rose-patisserie: #E5A1A9; /* Rose du macaron/glaçage (pour les accents, boutons) */
-    --color-medium-brown: #A07D6C;    /* Marron moyen des desserts/ombres (pour éléments de support) */
-    --color-cream: #F9EEDD;           /* Crème/Vanille du glaçage (pour fonds clairs, hover doux) */
-    --color-framboise-red: #C7565E;   /* Rouge des framboises (pour accents vifs) */
+    --color-primary-dark: #6B4F43;     
+    --color-light-beige: #F8F5E9;     
+    --color-rose-patisserie: #E5A1A9; 
+    --color-medium-brown: #A07D6C;    
+    --color-cream: #F9EEDD;           
+    --color-framboise-red: #C7565E;   
     
     --text-color-base: var(--color-primary-dark);
     --text-color-light: #ffffff; 
@@ -51,8 +51,9 @@ body {
 header {
     background-color: var(--color-cream); 
     padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
+    /* Ajustement : La navigation prendra la place du panier */
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
     border-bottom: 2px solid var(--color-rose-patisserie); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -75,7 +76,7 @@ header .logo-container p {
 
 header nav {
     flex-grow: 1;
-    text-align: center;
+    text-align: right; /* Les menus sont alignés à droite de l'espace */
 }
 header nav a {
     color: var(--color-primary-dark); 
@@ -91,6 +92,7 @@ header nav a:hover {
     color: var(--color-framboise-red);
 }
 
+/* Le .cart-button ne sert plus dans l'en-tête mais est gardé pour le flottant */
 .cart-button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -130,7 +132,6 @@ main {
     animation: fadeIn 0.8s ease-out;
 }
 
-/* Keyframe pour l'effet d'entrée de section */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -139,7 +140,6 @@ main {
 /* --- SECTION GALERIE --- */
 .gallery-grid {
     display: grid;
-    /* 4 colonnes pour les grands écrans, 2 pour les petits */
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
     gap: 1.5rem;
     margin-top: 1.5rem;
@@ -161,7 +161,7 @@ main {
 
 .gallery-item img {
     width: 100%;
-    height: 180px; /* Taille fixe pour un look uniforme */
+    height: 180px; 
     object-fit: cover;
     display: block;
     border-bottom: 3px solid var(--color-rose-patisserie);
@@ -175,8 +175,6 @@ main {
     padding: 0.75rem;
     margin: 0;
 }
-/* -------------------------------------- */
-
 
 .menu-grid {
     display: grid;
@@ -204,14 +202,12 @@ main {
     animation: shine-border 1.5s infinite linear; 
 }
 
-/* Keyframe pour la bordure animée (effet subtil) */
 @keyframes shine-border {
     0% { border-left-color: var(--color-rose-patisserie); }
     50% { border-left-color: var(--color-framboise-red); } 
     100% { border-left-color: var(--color-rose-patisserie); }
 }
 
-/* EFFET DE SCINTILLEMENT LÉGER SUR L'ARRIÈRE-PLAN */
 .menu-item::after {
     content: '';
     position: absolute;
@@ -248,7 +244,6 @@ main {
     color: var(--color-rose-patisserie); 
 }
 
-/* Boutons Ajouter au Panier */
 .add-to-cart {
     background-color: var(--button-bg);
     color: var(--button-text);
@@ -355,7 +350,6 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* NOUVELLE ANIMATION : Flash rapide à l'ajout (pour indiquer qu'un article a été ajouté) */
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -436,6 +430,7 @@ footer {
 
 
 /* --- BOUTONS FLOTTANTS (GÉNÉRAL) --- */
+/* Ces boutons sont conservés pour permettre l'accès au panier et au contact */
 #floating-cta {
     position: fixed;
     bottom: 10px;
@@ -460,7 +455,6 @@ footer {
 }
 
 .floating-cart-button {
-    /* Le bouton panier flottant réutilise la classe .cart-button */
     padding: 0.75rem 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -479,9 +473,17 @@ footer {
         text-align: center;
     }
 
-    /* La navigation est masquée (recommandé si vous n'avez pas de menu "burger") */
+    /* CORRECTION : Affiche la navigation sur mobile */
     header nav {
-        display: none; 
+        display: flex; /* Affiche les liens du menu */
+        flex-direction: column; /* Les liens s'empilent verticalement pour le mobile */
+        width: 100%; /* Occupe toute la largeur */
+        margin-top: 10px;
+    }
+    header nav a {
+        margin: 5px 0;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(107, 79, 67, 0.1); /* Séparateur léger */
     }
 
     .brand-logo {
@@ -489,21 +491,17 @@ footer {
         margin-right: 0;
     }
     
-    /* CORRECTION : Affiche la devise ('Vos instants gourmands...') */
+    /* Affiche la devise ('Vos instants gourmands...') */
     header .logo-container p {
         font-size: 0.85rem;
         display: block; 
         margin-top: 0.25rem;
     }
     
-    /* CORRECTION : Affiche le bouton Panier de l'en-tête (s'il est présent dans le HTML) */
-    header .cart-button {
-        display: block; 
-        position: static; 
-        margin-top: 10px;
-    }
-    
-    /* CORRECTION : Affiche les boutons flottants Panier et Contact */
+    /* Le bouton Panier de l'en-tête a été supprimé du HTML, cette règle n'est plus nécessaire. */
+    /* L'affichage des boutons flottants est géré par la règle ci-dessous. */
+
+    /* Affiche les boutons flottants Panier et Contact */
     #floating-cta {
         display: flex;
     }
