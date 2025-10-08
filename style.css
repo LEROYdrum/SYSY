@@ -51,7 +51,6 @@ body {
 header {
     background-color: var(--color-cream); 
     padding: 1rem 5%;
-    /* Ajustement : La navigation prendra la place du panier */
     display: flex; 
     justify-content: space-between; 
     align-items: center;
@@ -76,7 +75,7 @@ header .logo-container p {
 
 header nav {
     flex-grow: 1;
-    text-align: right; /* Les menus sont alignés à droite de l'espace */
+    text-align: right; 
 }
 header nav a {
     color: var(--color-primary-dark); 
@@ -92,7 +91,6 @@ header nav a:hover {
     color: var(--color-framboise-red);
 }
 
-/* Le .cart-button ne sert plus dans l'en-tête mais est gardé pour le flottant */
 .cart-button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
@@ -430,7 +428,6 @@ footer {
 
 
 /* --- BOUTONS FLOTTANTS (GÉNÉRAL) --- */
-/* Ces boutons sont conservés pour permettre l'accès au panier et au contact */
 #floating-cta {
     position: fixed;
     bottom: 10px;
@@ -467,23 +464,28 @@ footer {
 @media (max-width: 768px) {
     
     header {
-        /* Permet aux éléments de l'en-tête de s'empiler */
         flex-direction: column;
         padding: 0.75rem 3%;
         text-align: center;
     }
-
-    /* CORRECTION : Affiche la navigation sur mobile */
+    
+    /* CORRECTION CLÉ 1: Les liens sont maintenant affichés en ligne (row) au lieu d'empilés (column) */
     header nav {
-        display: flex; /* Affiche les liens du menu */
-        flex-direction: column; /* Les liens s'empilent verticalement pour le mobile */
-        width: 100%; /* Occupe toute la largeur */
+        display: flex; 
+        flex-direction: row; /* Changement pour afficher les liens côte à côte */
+        justify-content: space-around; /* Distribue l'espace entre les liens */
+        width: 100%; 
         margin-top: 10px;
     }
+    
+    /* CORRECTION CLÉ 2: Réduction de la taille de la police et de la marge des liens */
     header nav a {
-        margin: 5px 0;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(107, 79, 67, 0.1); /* Séparateur léger */
+        font-size: 0.75rem; /* Réduit la police pour gagner de la place */
+        margin: 0 2px; /* Réduit la marge entre les liens */
+        padding: 0.25rem 0.1rem; /* Réduit le padding */
+        /* Supprime la bordure de séparation pour gagner de la hauteur */
+        border-bottom: none; 
+        white-space: nowrap; /* Empêche les liens de passer à la ligne */
     }
 
     .brand-logo {
@@ -498,9 +500,6 @@ footer {
         margin-top: 0.25rem;
     }
     
-    /* Le bouton Panier de l'en-tête a été supprimé du HTML, cette règle n'est plus nécessaire. */
-    /* L'affichage des boutons flottants est géré par la règle ci-dessous. */
-
     /* Affiche les boutons flottants Panier et Contact */
     #floating-cta {
         display: flex;
