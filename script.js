@@ -5,11 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Éléments du DOM
     const cartModal = document.getElementById('cart-modal');
+    
+    // Boutons du Header
     const openCartBtn = document.getElementById('open-cart');
+    const cartCountElement = document.getElementById('cart-count');
+
+    // Nouveaux éléments flottants
+    const openCartFloatBtn = document.getElementById('open-cart-float');
+    const cartCountFloatElement = document.getElementById('cart-count-float');
+
     const closeCartBtn = document.querySelector('.close-button');
     const cartItemsContainer = document.getElementById('cart-items');
     const cartTotalElement = document.getElementById('cart-total');
-    const cartCountElement = document.getElementById('cart-count');
     const checkoutBtn = document.getElementById('checkout-whatsapp');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
@@ -54,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         cartTotalElement.textContent = `${total.toLocaleString('fr-FR')} FCFA`;
-        cartCountElement.textContent = cart.length;
+        
+        // Mise à jour des DEUX compteurs
+        cartCountElement.textContent = cart.length; 
+        cartCountFloatElement.textContent = cart.length;
     }
 
     /**
@@ -88,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('remove-item')) {
             const index = e.target.dataset.index;
             cart.splice(index, 1);
+            // Pas de flash à la suppression
             updateCartDisplay(); 
         }
     });
@@ -95,7 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Ouverture/Fermeture du modal.
      */
-    openCartBtn.onclick = () => { cartModal.style.display = 'block'; }
+    const openModal = () => { cartModal.style.display = 'block'; };
+    
+    // Le modal s'ouvre avec le bouton du header ou le bouton flottant
+    openCartBtn.onclick = openModal;
+    openCartFloatBtn.onclick = openModal;
+    
     closeCartBtn.onclick = () => { cartModal.style.display = 'none'; }
     window.onclick = (event) => { if (event.target === cartModal) { cartModal.style.display = 'none'; } }
 
