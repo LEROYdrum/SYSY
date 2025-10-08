@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
     /**
+     * Ouverture/Fermeture du modal.
+     */
+    const openModal = () => { cartModal.style.display = 'block'; }; // Fonction openModal
+
+    /**
      * Met à jour l'affichage du panier (liste des articles, total, compteur).
      */
     function updateCartDisplay(flashIndex = -1) {
@@ -86,7 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = itemElement.dataset.name;
                 const price = parseInt(itemElement.dataset.price);
                 const details = itemElement.dataset.details || "Détails à confirmer"; 
+                
+                // 1. Ajouter l'article
                 addItemToCart(name, price, details);
+                
+                // 2. LIGNE RETIRÉE/COMMENTÉE : Ne plus ouvrir le modal après l'ajout
+                // openModal(); 
             }
         });
     });
@@ -103,10 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /**
-     * Ouverture/Fermeture du modal.
-     */
-    const openModal = () => { cartModal.style.display = 'block'; };
     
     // Le modal s'ouvre avec le bouton du header ou le bouton flottant
     openCartBtn.onclick = openModal;
