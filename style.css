@@ -47,14 +47,8 @@ body {
     text-align: center;
 }
 
-/* --- HEADER (Non-fixe et Centré) --- */
+/* --- HEADER --- */
 header {
-    /* Retire la position sticky/fixe et utilise le centrage max-width */
-    max-width: 1200px; 
-    margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
-    
     background-color: var(--color-cream); 
     padding: 1rem 5%;
     display: flex;
@@ -62,6 +56,7 @@ header {
     align-items: center;
     border-bottom: 2px solid var(--color-rose-patisserie); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* L'en-tête n'est plus fixe */
     z-index: 1000;
 }
 header .logo-container {
@@ -141,6 +136,48 @@ main {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- SECTION GALERIE --- */
+.gallery-grid {
+    display: grid;
+    /* 4 colonnes pour les grands écrans, 2 pour les petits */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.gallery-item {
+    background-color: var(--color-light-beige);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    border: 1px solid var(--color-rose-patisserie);
+}
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 180px; /* Taille fixe pour un look uniforme */
+    object-fit: cover;
+    display: block;
+    border-bottom: 3px solid var(--color-rose-patisserie);
+}
+
+.gallery-item p {
+    font-family: 'Pacifico', cursive;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--color-primary-dark);
+    padding: 0.75rem;
+    margin: 0;
+}
+/* -------------------------------------- */
+
 
 .menu-grid {
     display: grid;
@@ -269,7 +306,6 @@ footer {
     color: var(--text-color-base);
     margin-top: auto; 
 }
-
 .footer-whatsapp {
     color: #25d366; 
     text-decoration: none;
@@ -281,45 +317,6 @@ footer {
 .footer-whatsapp:hover {
     color: #4CAF50;
 }
-
-
-/* --- NOUVELLE SECTION : BOUTONS FLOTTANTS (WhatsApp et Panier) --- */
-#floating-cta {
-    position: fixed;
-    bottom: 1.5rem; /* Espace depuis le bas */
-    right: 1.5rem; /* Espace depuis la droite */
-    z-index: 3000; /* Très haut pour être toujours visible */
-    display: flex;
-    flex-direction: row; /* Alignement horizontal */
-    align-items: center;
-    gap: 10px; /* Espace entre les deux boutons */
-}
-
-/* Style spécifique au bouton WhatsApp flottant */
-.whatsapp-floating-button {
-    background-color: #25d366; 
-    color: var(--text-color-light);
-    border: none;
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.whatsapp-floating-button:hover {
-    background-color: #4CAF50;
-    transform: scale(1.02);
-}
-
-/* Style pour le bouton Panier flottant (hérite de .cart-button) */
-.floating-cart-button {
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 
 /* Modal général (backdrop) */
 .modal {
@@ -439,6 +436,37 @@ footer {
 }
 
 
+/* --- BOUTONS FLOTTANTS (GÉNÉRAL) --- */
+#floating-cta {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1500;
+    display: flex;
+    gap: 10px;
+}
+
+.whatsapp-floating-button {
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+.whatsapp-floating-button:hover {
+    background-color: #4CAF50;
+}
+
+.floating-cart-button {
+    /* Le bouton panier flottant réutilise la classe .cart-button */
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 /* #################################################################### */
 /* ------------------------ RESPONSIVE DESIGN ------------------------- */
 /* #################################################################### */
@@ -451,16 +479,10 @@ footer {
         text-align: center;
     }
 
-    /* Masque la navigation sur mobile */
+    /* Masque la navigation et le texte sur mobile */
     header nav {
         display: none; 
     }
-
-    .brand-logo {
-        max-height: 60px; 
-        margin-right: 0;
-    }
-    
     header .logo-container p {
         display: none; 
     }
@@ -470,6 +492,11 @@ footer {
         display: none;
     }
 
+    .brand-logo {
+        max-height: 60px; 
+        margin-right: 0;
+    }
+    
     main {
         padding: 1.5rem 3%;
     }
@@ -477,32 +504,19 @@ footer {
     .menu-section {
         padding: 1rem;
     }
+    
+    /* Galerie sur mobile: 2 colonnes */
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .gallery-item img {
+        height: 150px; 
+    }
 
     .menu-grid {
         grid-template-columns: 1fr; 
         gap: 1rem;
-    }
-
-    /* Ajustement du modal pour les petits écrans */
-    .modal-content {
-        width: 90%;
-        margin: 5% auto;
-        max-height: 90vh; 
-    }
-    
-    /* Ajustement de la position et de la taille du groupe flottant pour mobile */
-    #floating-cta {
-        bottom: 0.5rem; 
-        right: 0.5rem;
-        gap: 6px;
-    }
-    .whatsapp-floating-button, .floating-cart-button {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.8rem;
-    }
-
-    /* On désactive le scintillement (::after) sur mobile pour les performances */
-    .menu-item:hover::after {
-        content: none;
     }
 }
