@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('remove-item')) {
             const index = e.target.dataset.index;
             cart.splice(index, 1);
-            // Pas de flash à la suppression
             updateCartDisplay(); 
         }
     });
